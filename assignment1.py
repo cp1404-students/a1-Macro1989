@@ -44,7 +44,7 @@ def create_song_list(songs_csv: str):
 
 def save_song_list(songs_csv: str, song_list):
     """ saves a song list to a specified csv"""
-    file = open(songs_csv, "w")
+    file = open(songs_csv, "w", newline="")
     csvwriter = csv.writer(file)
     for song in song_list:
         csvwriter.writerow(song)
