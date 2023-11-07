@@ -20,7 +20,7 @@ def main():
             add_song(song_list)
         if menu_choice == "C":
             complete_song(song_list)
-        if menu_choice == "Q":
+        if menu_choice  == "Q":
             return
 
 
