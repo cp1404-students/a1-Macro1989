@@ -27,7 +27,6 @@ def main():
             break
 
 
-
 def create_song_list(songs_csv: str):
     """ Creates a song list from a specified csv"""
     file = open(songs_csv)
@@ -37,8 +36,6 @@ def create_song_list(songs_csv: str):
         song_list.append(row)
     file.close()
     return song_list
-
-
 
 
 def display_menu():
@@ -56,15 +53,22 @@ Q - Quit""")
     return menu_choice
 
 
-def display_song(song_list, song_learnt=None):
+def display_song(song_list):
     """ Display a list of all the songs with details and a count of these songs, unlearned songs will have an *"""
+    learn_count = 0
     for song in song_list:
         if song[3] == "u":
             song_learnt = "*"
+
         else:
             song_learnt = " "
+            learn_count = learn_count + 1
 
-        print(f"{song_list.index(song)+1}. {song_learnt: <2} {song[0]:<30} - {song[1]:<20} ({song[2]:})")
+
+
+        print(f"{song_list.index(song) + 1}. {song_learnt: <2} {song[0]:<30} - {song[1]:<20} ({song[2]:})")
+    unlearn_count = len(song_list) - learn_count
+    print(f"{learn_count} songs learned, {unlearn_count} songs still to learn.")
 
 
 
@@ -100,12 +104,20 @@ def add_song(songlist):
     songlist.append(song)
 
 
-
-
-
-
 def complete_song(song_list):
-    """ prompts the user to add a song's title artist and year"""
+    """ prompts users to select a song that is currently unlearnt and mark as learnt"""
+    try:
+        song_choice = int(input("Enter the number of a song to mark as learned."))
+    except ValueError:
+        print("Invalid input; enter a valid number.")
+        song_choice = int(input("Enter the number of a song to mark as learned."))
+    while song_choice < 0:
+        print("Number must be > 0.")
+        song_choice = int(input("Enter the number of a song to mark as learned."))
+    if song_list[song_choice - 1][3] == "l":
+        print(f":you have already learned {song_list[song_choice][0]}.")
+    else:
+        song_list[song_choice - 1][3] = "l"
 
 
 if __name__ == '__main__':
