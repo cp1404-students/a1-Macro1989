@@ -24,7 +24,7 @@ def main():
             complete_song(song_list)
             menu_choice = display_menu()
         if menu_choice == "Q":
-            return
+            break
 
 
 
@@ -68,14 +68,40 @@ def display_song(song_list, song_learnt=None):
 
 
 
-def add_song(song_list):
-    """ prompts the user to add a song's title artist and year"""
+def add_song(songlist):
+    """ prompts the user to add a new song's title artist and year"""
     song = []
     print("Please Enter the Songs Details:")
-    song.append(input("Title"))
-    while song[0] == "":
+    title = input("Title:")
+    while title == "":
         print("Title cannot be blank.")
-        song.append(input("Title"))
+        title = input("Title")
+    song.append(title)
+
+    artist = input("Artist:")
+    while artist == "":
+        print("Artist cannot be blank.")
+        artist = input("Artist:")
+    song.append(artist)
+
+    try:
+        year = int(input("Year:"))
+    except ValueError:
+        print("Invalid input; enter a valid number.")
+        year = int(input("Year:"))
+    while year < 0:
+        print("Number must be > 0.")
+        year = int(input("Year"))
+    song.append(year)
+
+    song.append("u")
+
+    print(f"{song[0]} by {song[1]} ({song[2]}) added to song list.")
+    songlist.append(song)
+
+
+
+
 
 
 def complete_song(song_list):
