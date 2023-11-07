@@ -20,12 +20,13 @@ def main():
             add_song(song_list)
         if menu_choice == "C":
             complete_song(song_list)
-        if menu_choice  == "Q":
+        if menu_choice == "Q":
             return
 
 
 
 def create_song_list(songs_csv: str):
+    """ Creates a song list from a specified csv"""
     file = open(songs_csv)
     csvreader = csv.reader(file)
     song_list = []
@@ -34,7 +35,7 @@ def create_song_list(songs_csv: str):
     file.close()
     return song_list
 
-    """ Creates a song list from a specified csv"""
+
 
 
 def display_menu():
