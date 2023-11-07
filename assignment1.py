@@ -25,15 +25,26 @@ def main():
             menu_choice = display_menu()
         if menu_choice == "Q":
             break
+    save_song_list("songs.csv", song_list)
+
 
 
 def create_song_list(songs_csv: str):
     """ Creates a song list from a specified csv"""
-    file = open(songs_csv)
+    file = open(songs_csv, "r")
     csvreader = csv.reader(file)
     song_list = []
     for row in csvreader:
         song_list.append(row)
+    file.close()
+    return song_list
+
+def save_song_list(songs_csv: str, song_list):
+    """ saves a song list to a specified csv"""
+    file = open(songs_csv, "w")
+    csvwriter = csv.writer(file)
+    for song in song_list:
+        csvwriter.writerow(song)
     file.close()
     return song_list
 
