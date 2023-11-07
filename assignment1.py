@@ -7,7 +7,9 @@ import csv
 
 
 def main():
-    """..."""
+    """Takes a csv song list and allows users to either display it, add songs to it or mark songs as learned.
+    Users are repeatedly prompted until they choose to exit program when any alterations they have made are saved to the csv"""
+
     print("Song List 1.0 - by Jarred Muller")
     song_list = create_song_list("songs.csv")
     print(song_list)
@@ -26,7 +28,7 @@ def main():
         if menu_choice == "Q":
             break
     save_song_list("songs.csv", song_list)
-
+    print("Make some music!")
 
 
 def create_song_list(songs_csv: str):
@@ -39,14 +41,14 @@ def create_song_list(songs_csv: str):
     file.close()
     return song_list
 
+
 def save_song_list(songs_csv: str, song_list):
     """ saves a song list to a specified csv"""
     file = open(songs_csv, "w")
     csvwriter = csv.writer(file)
     for song in song_list:
         csvwriter.writerow(song)
-    file.close()
-    return song_list
+    print(f"{len(song_list)} saved to {songs_csv}")
 
 
 def display_menu():
@@ -75,15 +77,12 @@ def display_song(song_list):
             song_learnt = " "
             learn_count = learn_count + 1
 
-
-
         print(f"{song_list.index(song) + 1}. {song_learnt: <2} {song[0]:<30} - {song[1]:<20} ({song[2]:})")
     unlearn_count = len(song_list) - learn_count
     print(f"{learn_count} songs learned, {unlearn_count} songs still to learn.")
 
 
-
-def add_song(songlist):
+def add_song(song_list):
     """ prompts the user to add a new song's title artist and year"""
     song = []
     print("Please Enter the Songs Details:")
@@ -112,7 +111,7 @@ def add_song(songlist):
     song.append("u")
 
     print(f"{song[0]} by {song[1]} ({song[2]}) added to song list.")
-    songlist.append(song)
+    song_list.append(song)
 
 
 def complete_song(song_list):
