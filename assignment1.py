@@ -11,6 +11,8 @@ def main():
     print("Song List 1.0 - by Jarred Muller")
     song_list = create_song_list("songs.csv")
     print(song_list)
+    menu_choice = display_menu()
+    print(menu_choice)
 
 
 def create_song_list(songs_csv: str):
@@ -28,14 +30,14 @@ def create_song_list(songs_csv: str):
 def display_menu():
     """Displays a list of choices the users can make and returns their choice"""
     menu_choice = ""
-    while menu_choice != "D" and != "D" and != "D" and != "D":
+    while menu_choice != "D" and menu_choice != "A" and menu_choice != "C" and menu_choice != "Q":
         print("""Menu:
         D - Display songs
         A - Add new song
         C - Complete a song
         Q - Quit""")
         menu_choice = input().upper()
-        if menu_choice != "D" and != "D" and != "D" and != "D":
+        if menu_choice != "D" and menu_choice != "A" and menu_choice != "C" and menu_choice != "Q":
             print("invalid choice")
     return menu_choice
 
